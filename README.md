@@ -5,12 +5,17 @@ Teste de Programador Foxcon
 Projeto desenvolvido em ASP.NET MVC com .NET Framework 4.8
 
 # Recursos Utilizados
-Recursos utilizados: bootstrap 5.1.3
-                     AutoMapper 5.2.0
-                     EntityFramework 6.4.4
-                     Oracle.ManagedDataAccess 21.5.0
-                     Oracle.ManagedDataAcess.EntityFramework 21.5.0
-                     PagedList 1.17.0
+bootstrap 5.1.3
+# 
+AutoMapper 5.2.0
+# 
+EntityFramework 6.4.4
+# 
+Oracle.ManagedDataAccess 21.5.0
+# 
+Oracle.ManagedDataAcess.EntityFramework 21.5.0
+# 
+PagedList 1.17.0
 
 # Dicas do Projeto
 Abertura de Projeto
