@@ -1,0 +1,32 @@
+﻿@model FoxConCRUD.ViewModels.DepartamentoViewModel
+
+
+@{
+    ViewBag.Title = "Incluindo novo";
+}
+
+<h2>Criando novo Departamento</h2>
+
+<hr />
+
+@using( Html.BeginForm( "Create", "Departamento", FormMethod.Post ) )
+{
+    <div class="row g-3">
+        <div class="col-sm-8">
+            <label class="form-label" for="@Model.name">Descrição</label>
+            @Html.TextBoxFor( x => x.name, new { @class = "form-text form-control" } )
+            @Html.ValidationMessageFor( x => x.name, "", new { @class = "text-danger" } )
+        </div>
+
+        <div class="col-sm-6">
+            <label class="form-label" for="@Model.active">Ativo</label>
+            <input type="checkbox" id="cbAtivo" name="cbAtivo" />
+        </div>
+
+        <div class="form-control-sm">
+            <a class="btn btn-danger btn-lg" href="@Url.Action("Index","Departamento")">Voltar</a>
+            <button class="btn btn-success btn-lg" type="submit">Gravar</button>
+        </div>
+
+    </div>
+}

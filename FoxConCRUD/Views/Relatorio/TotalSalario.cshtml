@@ -1,0 +1,55 @@
+﻿@model  List<FoxConCRUD.ViewModels.RelatorioViewModel>
+
+@{
+    ViewBag.Title = "Total de Salário";
+}
+
+@section CSS{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+}
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+@{
+    var dadosCharts = Html.Raw( Newtonsoft.Json.JsonConvert.SerializeObject( Model ) );
+}
+
+@section scripts
+{
+    <script>
+        var xValues = [];
+        var yValues = [];
+        var barColors = [];
+
+        var VIEWMODEL = @dadosCharts;
+
+        for (var i = 0; i < VIEWMODEL.length; i++) {
+
+            v = 16 + i * 75;
+            color = "rgba(" + v + ",16,255,0.76)";
+
+            xValues.push(VIEWMODEL[i].NOMEDEPARTAMENTO);
+            yValues.push(VIEWMODEL[i].salary);
+            barColors.push(color);
+        }
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Salários"
+                }
+            }
+        });
+    </script>
+
+}

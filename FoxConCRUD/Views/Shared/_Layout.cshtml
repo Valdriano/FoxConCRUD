@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Teste CRUD FOXCON" />
+    <meta name="author" content="Valdriano Oliveira" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    @RenderSection( "CSS", required: false )
+    @Styles.Render( "~/Content/css" )
+    @Scripts.Render( "~/bundles/modernizr" )
+</head>
+<body>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="@Url.Action("Index","Home")">Foxcon</a>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-dark">
+                <hr class="bg-light" />
+                <h4 class="h4 text-light">Cadastros</h4>
+                <hr class="bg-light" />
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Index","Departamento")"> Departamento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Funcionario")"> Funcionário</a>
+                        </li>
+                    </ul>
+                </div>
+                <hr class="bg-light" />
+                <h4 class="h4 text-light">Relatórios</h4>
+                <hr class="bg-light" />
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("TotalSalario","Relatorio")"> Total de Salários</a>
+                        </li>
+                    </ul>
+                </div>
+                <hr class="bg-light" />
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <br />
+                <hr />
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="mt-auto py-3 bg-light align-bottom">
+        <div class="container">
+            <span class="text-muted">Desenvolvido por Valdriano Oliveira</span>
+        </div>
+    </footer>
+
+    @Scripts.Render( "~/bundles/jquery" )
+    @Scripts.Render( "~/bundles/bootstrap" )
+    @RenderSection( "scripts", required: false )
+</body>
+</html>

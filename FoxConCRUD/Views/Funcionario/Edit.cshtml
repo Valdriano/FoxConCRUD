@@ -1,0 +1,63 @@
+﻿@using FoxConCRUD.Models;
+@model FoxConCRUD.ViewModels.FuncionarioViewModel
+
+@{
+    ViewBag.Title = "Editando funcionário";
+}
+
+<h2>Editando funcionário</h2>
+
+<hr />
+
+@using( Html.BeginForm( "Edit", "Funcionario", FormMethod.Post ) )
+{
+    <div class="row g-3">
+        <div class="col-sm-12">
+            <label class="form-label" for="@Model.name">Nome</label>
+            @Html.TextBoxFor( x => x.name, new { @class = "form-text form-control" } )
+            @Html.ValidationMessageFor( x => x.name, "", new { @class = "text-danger" } )
+        </div>
+
+        <div class="row g-3">
+            <div class="col-sm-4">
+                <label class="form-label">Departamento</label>
+
+                @Html.DropDownListFor( x => x.id_departamento, ( ( IEnumerable<Departamento> )ViewBag.Departamentos )
+               .Select( s => new SelectListItem
+                {
+                   Text = s.name,
+                   Value = s.id.ToString(),
+                   Selected = ( Model != null ) && ( s.id == Model.id_departamento )
+                    } )
+                , "Selecione um opção", new { @class = "form-control" } )
+
+                @Html.ValidationMessageFor( x => x.id_departamento, "", new { @class = "text-danger" } )
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">Sexo</label>
+                @Html.DropDownListFor( x => x.gender, ( ( IEnumerable<Sexo> )ViewBag.Sexos )
+               .Select( s => new SelectListItem
+               {
+                   Text = s.Descricao,
+                   Value = s.Codigo,
+                   Selected = ( Model != null ) && ( s.Codigo == Model.gender )
+               } )
+               , "Selecione um opção", new { @class = "form-control" } )
+
+                @Html.ValidationMessageFor( x => x.gender, "", new { @class = "text-danger" } )
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">Salário</label>
+                @Html.TextBoxFor( x => x.salary, new { @class = "form-text form-control" } )
+                @Html.ValidationMessageFor( x => x.salary, "", new { @class = "text-danger" } )
+            </div>
+        </div>
+
+        <div class="form-control-sm">
+            <a class="btn btn-danger btn-lg" href="@Url.Action("Index","Funcionario")">Voltar</a>
+            <button class="btn btn-success btn-lg" type="submit">Gravar</button>
+        </div>
+
+    </div>
+}
+

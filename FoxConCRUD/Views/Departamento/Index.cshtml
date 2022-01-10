@@ -1,0 +1,109 @@
+﻿@using PagedList;
+@model PagedList.IPagedList<FoxConCRUD.ViewModels.DepartamentoViewModel>
+
+@{
+    ViewBag.Title = "Departamento";
+}
+
+<div class="row">
+    <div class="col-10">
+        <h2>Departamento</h2>
+    </div>
+    <div class="col-2 align-text-bottom">
+        <span class="px-md-5">
+            <a href="@Url.Action("Create","Departamento",new { @class = "btn"} )">
+                <i class="bi bi-plus-circle-fill text-success" style="font-size: 2rem"></i>
+                Incluir Novo
+            </a>
+        </span>
+    </div>
+</div>
+
+<hr />
+
+@using( Html.BeginForm( "Buscar", "Departamento", FormMethod.Get, new { @class = "row" } ) )
+{
+
+    <div class="col-1">
+        <label class="form-control-plaintext">Pesquisar por:</label>
+    </div>
+    <div class="col-9">
+        <input type="text" class="form-control" id="filtros" name="filtros" placeholder="Buscar">
+    </div>
+    <div class="col-2">
+        <button type="submit" class="btn btn-primary mb-3">Pesquisar</button>
+    </div>
+}
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            Descrição
+        </th>
+        <th>
+            Modificado em
+        </th>
+        <th>
+            Ativo
+        </th>
+        <th>
+            Ações
+        </th>
+    </tr>
+
+    @foreach( var item in Model )
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor( modelItem => item.name )
+            </td>
+            <td>
+                @Html.DisplayFor( modelItem => item.modifield_at )
+            </td>
+            <td>
+                <input type="checkbox" value="@(item.active == "A" ? "true" : "false")" @(item.active == "A" ? "checked" : String.Empty) readonly />
+            </td>
+            <td>
+                @Html.ActionLink( "Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning" } )
+                |
+                @Html.ActionLink( "Excluir", "Delete", new { id = item.id }, new { @class = "btn btn-danger" } )
+            </td>
+        </tr>
+    }
+
+</table>
+
+<hr class="my-3" />
+
+<div>
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    de @Model.PageCount
+
+    @if( Model.HasPreviousPage )
+    {
+        @Html.ActionLink( "<<", "Index", new { pagina = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } )
+        @Html.Raw( " " );
+        @Html.ActionLink( "< Anterior", "Index", new { pagina = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } )
+    }
+    else
+    {
+        @:<<
+        @Html.Raw( " " );
+        @:< Anterior
+    }
+
+    @if( Model.HasNextPage )
+    {
+        @Html.ActionLink( "Próxima >", "Index", new { pagina = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } )
+        @Html.Raw( " " );
+        @Html.ActionLink( ">>", "Index", new { pagina = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } )
+    }
+    else
+    {
+        @:Próxima >
+        @Html.Raw( " " )
+        @:>>
+    }
+</div>
